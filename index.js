@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
+const videoRouter = require('./routes/video');
 
 app.use(cors({
     origin: ['http://localhost:3000','http://localhost:3000/*','https://videoflix-app.netlify.app/*','https://videoflix-app.netlify.app']
@@ -22,6 +23,7 @@ mongoose.connect(process.env.MONGO_URL).then(() => {
 app.use(express.json());
 app.use('/api/auth', authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/videos", videoRouter);
 
 app.listen(process.env.PORT || 5000, () => {
     console.log("backend server is running");

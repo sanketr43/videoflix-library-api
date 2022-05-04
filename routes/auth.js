@@ -3,7 +3,7 @@ const CryptoJS = require('crypto-js');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-router.post('/register', (req,res) => {
+router.post('/register', async (req,res) => {
     const newUser = new User({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
@@ -12,7 +12,7 @@ router.post('/register', (req,res) => {
     });
 
     try{
-        const {_id, first_name, last_name, email, isAdmin, createdAt, updatedAt} = await newUser.save();
+        const { _id, first_name, last_name, email, isAdmin, createdAt, updatedAt } = await newUser.save();
 
         const accessToken = jwt.sign({
             id: _id,
